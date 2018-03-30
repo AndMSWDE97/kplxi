@@ -14,7 +14,7 @@ public class Configuration {
             board.setNumberField(7, 5, new int[]{3});
             board.setNumberField(4, 6, new int[]{2, 3});
             board.setNumberField(6, 7, new int[]{2});
-        } catch (Exception e) {
+        } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
             System.out.println("Board not large enough");
         }

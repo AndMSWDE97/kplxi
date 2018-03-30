@@ -12,11 +12,11 @@ public class Board {
         reset();
     }
 
-    public void setNumberField(int x, int y, int[] numbers) throws Exception {
-        if (!board[y][x].isFilled()) {
-            board[y][x].setNumberField(true);
-            board[y][x].setNumbers(numbers);
-        } else throw new Exception("field was already filled in");
+    public void setNumberField(int x, int y, int[] numbers) {
+        if (board[y][x].isFilled())
+            board[y][x].setFilled(false);
+        board[y][x].setNumberField(true);
+        board[y][x].setNumbers(numbers);
     }
 
     public ArrayList<Field> findPossibleFields() {
