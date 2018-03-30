@@ -11,9 +11,8 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    GridPane grid;
-    GridPaneControler gridPaneControler;
-    Board board;
+    private GridPaneControler gridPaneControler;
+    private Board board;
 
     public static void main(String[] args) {
         launch();
@@ -26,7 +25,7 @@ public class Main extends Application {
         button.setOnAction(e -> BoardSolver.solveBoard(board, gridPaneControler));
 
 
-        grid = new GridPane();
+        GridPane grid = new GridPane();
         gridPaneControler = new GridPaneControler(grid);
         board = new Board(8);
 

@@ -18,8 +18,7 @@ public class BoardSolver {
             int x = numberField.getX();
             for (int i = y - 1; i <= y + 1; i++) {
                 for (int j = x - 1; j <= x + 1; j++) {
-                    //check for out of Bounds
-                    if (!(i < 0 || j < 0 || i >= fields.length || j >= fields[i].length)) {
+                    if (!(i < 0 || j < 0 || i >= fields.length || j >= fields[i].length)) {         //check for out of Bounds
                         int currentProbability = fields[i][j].getProbability();
                         for (int k = 0; k < numbers.length; k++) {
                             currentProbability += numbers[k];

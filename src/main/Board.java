@@ -66,7 +66,7 @@ public class Board {
             firstFieldFilled = board[scannY][scannX].isFilled();
         }
         for (int circleSegment = 0; circleSegment < 4; circleSegment++) {
-            for (int i = 0; i < 2; i++) {           //top left to top right
+            for (int i = 0; i < 2; i++) {
                 if (!(scannY < 0 || scannX < 0 || scannY >= board.length || scannX >= board[scannY].length)) {
                     if (board[scannY][scannX].isFilled()) {
                         unbroken++;
