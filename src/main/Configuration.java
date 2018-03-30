@@ -4,43 +4,42 @@ public class Configuration {
 
     public static void setExampleBoard(Board board) {
         try {
-            board.setNumberField(2, 1, new int[] {3});
-            board.setNumberField(7, 1, new int[] {2});
-            board.setNumberField(4, 2, new int[] {1, 5});
-            board.setNumberField(6, 2, new int[] {5});
-            board.setNumberField(1, 3, new int[] {3});
-            board.setNumberField(5, 4, new int[] {3, 3});
-            board.setNumberField(2, 5, new int[] {4});
-            board.setNumberField(7, 5, new int[] {3});
-            board.setNumberField(4, 6, new int[] {2, 3});
-            board.setNumberField(6, 7, new int[] {2});
+            board.setNumberField(2, 1, new int[]{3});
+            board.setNumberField(7, 1, new int[]{2});
+            board.setNumberField(4, 2, new int[]{1, 5});
+            board.setNumberField(6, 2, new int[]{5});
+            board.setNumberField(1, 3, new int[]{3});
+            board.setNumberField(5, 4, new int[]{3, 3});
+            board.setNumberField(2, 5, new int[]{4});
+            board.setNumberField(7, 5, new int[]{3});
+            board.setNumberField(4, 6, new int[]{2, 3});
+            board.setNumberField(6, 7, new int[]{2});
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public static void setTenByTenBoard(Board board) {
-        try{
-            board.setNumberField(1, 1, new int[] {2});
-            board.setNumberField(4, 1, new int[] {1});
-            board.setNumberField(7, 1, new int[] {3});
-            board.setNumberField(9, 2, new int[] {3});
-            board.setNumberField(1, 3, new int[] {3});
-            board.setNumberField(4, 3, new int[] {4});
-            board.setNumberField(7, 3, new int[] {5});
-            board.setNumberField(9, 4, new int[] {2, 2});
-            board.setNumberField(0, 5, new int[] {3});
-            board.setNumberField(2, 6, new int[] {4});
-            board.setNumberField(5, 6, new int[] {5});
-            board.setNumberField(8, 6, new int[] {6});
-            board.setNumberField(0, 7, new int[] {5});
-            board.setNumberField(2, 8, new int[] {6});
-            board.setNumberField(5, 8, new int[] {8});
-            board.setNumberField(8, 8, new int[] {7});
+        try {
+            board.setNumberField(1, 1, new int[]{2});
+            board.setNumberField(4, 1, new int[]{1});
+            board.setNumberField(7, 1, new int[]{3});
+            board.setNumberField(9, 2, new int[]{3});
+            board.setNumberField(1, 3, new int[]{3});
+            board.setNumberField(4, 3, new int[]{4});
+            board.setNumberField(7, 3, new int[]{5});
+            board.setNumberField(9, 4, new int[]{2, 2});
+            board.setNumberField(0, 5, new int[]{3});
+            board.setNumberField(2, 6, new int[]{4});
+            board.setNumberField(5, 6, new int[]{5});
+            board.setNumberField(8, 6, new int[]{6});
+            board.setNumberField(0, 7, new int[]{5});
+            board.setNumberField(2, 8, new int[]{6});
+            board.setNumberField(5, 8, new int[]{8});
+            board.setNumberField(8, 8, new int[]{7});
         } catch (IndexOutOfBoundsException e) {
             System.out.println("board not large enough");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

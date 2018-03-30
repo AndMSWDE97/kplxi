@@ -13,6 +13,7 @@ public class Field {
         this.y = y;
         this.numberField = false;
     }
+
     public Field(int x, int y, int[] numbers) {
         this.x = x;
         this.y = y;

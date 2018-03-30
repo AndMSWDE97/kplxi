@@ -11,9 +11,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
 public class GridPaneControler {
-    
+
     private GridPane gridPane;
-    
+
     public GridPaneControler(GridPane gridPane) {
         this.gridPane = gridPane;
     }
@@ -38,7 +38,7 @@ public class GridPaneControler {
                     label.setStyle("-fx-background-color: lightgrey");
                 } else {
                     if (fields[y][x].isFilled()) {
-                        if (board.numberOfUnfullfilledFields() == 0) {
+                        if (board.isSolved()) {
                             label.setStyle("-fx-background-color: green");
                         } else {
                             label.setStyle("-fx-background-color: black");

@@ -14,7 +14,7 @@ public class BoardSolver {
 
     public void setUpProbabilities(Board board) {
         Field[][] fields = board.getBoard();
-        
+
         board.resetProbabilities();
         for (Field numberField : board.getNumberFields()) {
             int[] numbers = numberField.getNumbers();
@@ -38,7 +38,7 @@ public class BoardSolver {
 
     public void solveBoard(Board board, GridPaneControler gridPaneControler) {
         setUpProbabilities(board);
-        
+
         Field[][] fields = board.getBoard();
 
         ArrayList<Field> allFields = new ArrayList<>();
@@ -51,13 +51,14 @@ public class BoardSolver {
         }
         allFields.sort((a, b) -> b.getProbability() - a.getProbability());
 
-        Thread thread = new Thread( () -> {
+        Thread thread = new Thread(() -> {
             for (Field field : allFields) {
                 field.setFilled(true);
 
                 boolean itWorked = solveStep(board, gridPaneControler);
 
                 if (itWorked) {
+                    board.setSolved(true);
                     Platform.runLater(() -> gridPaneControler.updateGrid(board));
                     return;
                 } else {
@@ -72,7 +73,7 @@ public class BoardSolver {
     private boolean solveStep(Board board, GridPaneControler gridPaneControler) {
         if (boardInNotWorking(board)) return false;
         Platform.runLater(() -> gridPaneControler.updateGrid(board));
-        if (board.numberOfUnfullfilledFields() == 0) {
+        if (numberOfUnfulfilledFields(board) == 0) {
             return true;
         }
         ArrayList<Field> possibleFields = board.findPossibleFields();
@@ -91,7 +92,7 @@ public class BoardSolver {
 
     private boolean errorInBoard(Board board) {
         Field[][] fields = board.getBoard();
-        
+
         //check that no 2x2 area is all black
         for (int y = 0; y < fields.length - 1; y++) {
             for (int x = 0; x < fields[y].length - 1; x++) {
@@ -136,12 +137,43 @@ public class BoardSolver {
         return false;
     }
 
+    public int numberOfUnfulfilledFields(Board board) {
+        int unfulfilled = 0;
+        for (Field numberField : board.getNumberFields()) {
+            int[] numbers = numberField.getNumbers();
+            int y = numberField.getY();
+            int x = numberField.getX();
+            ArrayList<Integer> blackRegions = board.blackRegionsSurroundingField(x, y);
+            if (numbers.length > 1) {
+                for (int i = 0; i < numbers.length; i++) {
+                    Integer foundRegion = null;
+                    for (Integer region : blackRegions) {
+                        if (region == numbers[i]) {
+                            foundRegion = region;
+                        }
+                    }
+                    if (foundRegion != null) {
+                        blackRegions.remove(foundRegion);
+                    } else unfulfilled++;
+                }
+            } else {
+                if (blackRegions.size() == 1) {
+                    if (blackRegions.get(0) != numbers[0]) {
+                        unfulfilled++;
+                    }
+                } else unfulfilled++;
+            }
+        }
+
+        return unfulfilled;
+    }
+
     private void boardToNotWorking(Board board) {
         notWorking.add(board.getCurrentBoardState());
     }
 
     private boolean boardInNotWorking(Board board) {
-        for(ArrayList<Boolean> errorState : notWorking) {
+        for (ArrayList<Boolean> errorState : notWorking) {
             if (errorState.equals(board.getCurrentBoardState())) {
                 return true;
             }

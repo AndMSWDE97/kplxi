@@ -6,7 +6,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -30,7 +29,7 @@ public class Main extends Application {
 
         grid = new GridPane();
         gridPaneControler = new GridPaneControler(grid);
-        board = new Board(8, grid);
+        board = new Board(8);
         boardSolver = new BoardSolver();
 
         Configuration.setExampleBoard(board);
@@ -47,9 +46,5 @@ public class Main extends Application {
 
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-    public void setGrid(GridPane grid) {
-        this.grid = grid;
     }
 }

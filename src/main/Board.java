@@ -1,17 +1,13 @@
 package main;
 
-import javafx.scene.layout.GridPane;
-
 import java.util.ArrayList;
 
 public class Board {
+    private boolean solved;
     private Field[][] board;
-    private GridPane gridPane;
-    private ArrayList<ArrayList<Boolean>> notWorking;
 
-    public Board(int size, GridPane gridPane) {
-        this.gridPane = gridPane;
-        this.notWorking = new ArrayList<>();
+    public Board(int size) {
+        solved = false;
         board = new Field[size][size];
         reset();
     }
@@ -114,51 +110,6 @@ public class Board {
         return blackRegions;
     }
 
-    public int numberOfBlackFieldsSurrounding(int x, int y) {
-        int countBlack = 0;
-        for (int i = y - 1; i <= y + 1; i++) {
-            for (int j = x - 1; j <= x + 1; j++) {
-                //check for out of Bounds                                           //check for not numberField itself
-                if (!(i < 0 || j < 0 || i >= board.length || j >= board[i].length) && (i != y || j != x)) {
-                    if (board[i][j].isFilled()) {
-                        countBlack++;
-                    }
-                }
-            }
-        }
-        return countBlack;
-    }
-
-    public int numberOfUnfullfilledFields() {
-        int unfullfilled = 0;
-        for (Field numberField : getNumberFields()) {
-            int[] numbers = numberField.getNumbers();
-            int y = numberField.getY();
-            int x = numberField.getX();
-            if (numbers.length > 1) {
-                ArrayList<Integer> blackRegions = blackRegionsSurroundingField(x, y);
-                for (int i = 0; i < numbers.length; i++) {
-                    Integer foundRegion = null;
-                    for (Integer region : blackRegions) {
-                        if (region == numbers[i]) {
-                            foundRegion = region;
-                        }
-                    }
-                    if (foundRegion != null) {
-                        blackRegions.remove(foundRegion);
-                    } else unfullfilled++;
-                }
-            } else {
-                int countBlack = numberOfBlackFieldsSurrounding(x, y);
-                if (countBlack != numbers[0]) {
-                    unfullfilled++;
-                }
-            }
-        }
-
-        return unfullfilled;
-    }
-
     public void resetProbabilities() {
         for (int y = 0; y < board.length; y++) {
             for (int x = 0; x < board[y].length; x++) {
@@ -189,5 +140,13 @@ public class Board {
                 board[y][x] = new Field(x, y);
             }
         }
+    }
+
+    public boolean isSolved() {
+        return solved;
+    }
+
+    public void setSolved(boolean solved) {
+        this.solved = solved;
     }
 }
