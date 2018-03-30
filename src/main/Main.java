@@ -14,7 +14,6 @@ public class Main extends Application {
     GridPane grid;
     GridPaneControler gridPaneControler;
     Board board;
-    BoardSolver boardSolver;
 
     public static void main(String[] args) {
         launch();
@@ -24,13 +23,12 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Tapa solver");
         Button button = new Button("solve");
-        button.setOnAction(e -> boardSolver.solveBoard(board, gridPaneControler));
+        button.setOnAction(e -> BoardSolver.solveBoard(board, gridPaneControler));
 
 
         grid = new GridPane();
         gridPaneControler = new GridPaneControler(grid);
         board = new Board(8);
-        boardSolver = new BoardSolver();
 
         Configuration.setExampleBoard(board);
 

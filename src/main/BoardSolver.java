@@ -6,13 +6,9 @@ import java.util.ArrayList;
 
 public class BoardSolver {
 
-    private ArrayList<ArrayList<Boolean>> notWorking;
+    private static ArrayList<ArrayList<Boolean>> notWorking;
 
-    public BoardSolver() {
-        notWorking = new ArrayList<>();
-    }
-
-    public void setUpProbabilities(Board board) {
+    public static void setUpProbabilities(Board board) {
         Field[][] fields = board.getBoard();
 
         board.resetProbabilities();
@@ -36,8 +32,10 @@ public class BoardSolver {
         }
     }
 
-    public void solveBoard(Board board, GridPaneControler gridPaneControler) {
+    public static void solveBoard(Board board, GridPaneControler gridPaneControler) {
         setUpProbabilities(board);
+
+        notWorking = new ArrayList<>();
 
         Field[][] fields = board.getBoard();
 
@@ -70,7 +68,7 @@ public class BoardSolver {
 
     }
 
-    private boolean solveStep(Board board, GridPaneControler gridPaneControler) {
+    private static boolean solveStep(Board board, GridPaneControler gridPaneControler) {
         if (boardInNotWorking(board)) return false;
         Platform.runLater(() -> gridPaneControler.updateGrid(board));
         if (numberOfUnfulfilledFields(board) == 0) {
@@ -90,7 +88,7 @@ public class BoardSolver {
         return false;
     }
 
-    private boolean errorInBoard(Board board) {
+    private static boolean errorInBoard(Board board) {
         Field[][] fields = board.getBoard();
 
         //check that no 2x2 area is all black
@@ -137,7 +135,7 @@ public class BoardSolver {
         return false;
     }
 
-    public int numberOfUnfulfilledFields(Board board) {
+    public static int numberOfUnfulfilledFields(Board board) {
         int unfulfilled = 0;
         for (Field numberField : board.getNumberFields()) {
             int[] numbers = numberField.getNumbers();
@@ -168,11 +166,11 @@ public class BoardSolver {
         return unfulfilled;
     }
 
-    private void boardToNotWorking(Board board) {
+    private static void boardToNotWorking(Board board) {
         notWorking.add(board.getCurrentBoardState());
     }
 
-    private boolean boardInNotWorking(Board board) {
+    private static boolean boardInNotWorking(Board board) {
         for (ArrayList<Boolean> errorState : notWorking) {
             if (errorState.equals(board.getCurrentBoardState())) {
                 return true;
