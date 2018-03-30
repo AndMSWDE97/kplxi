@@ -1,14 +1,6 @@
 package main;
 
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 
 import java.util.ArrayList;
 
@@ -21,11 +13,7 @@ public class Board {
         this.gridPane = gridPane;
         this.notWorking = new ArrayList<>();
         board = new Field[size][size];
-        for (int y = 0; y < size; y++) {
-            for (int x = 0; x < size; x++) {
-                board[y][x] = new Field(x, y);
-            }
-        }
+        reset();
     }
 
     public void setNumberField(int x, int y, int[] numbers) throws Exception {
@@ -116,7 +104,7 @@ public class Board {
         if (unbroken != 0) {
             blackRegions.add(unbroken);
         }
-        if (x - 1 > 0 && firstFieldFilled && board[y][x - 1].isFilled()) {
+        if (x - 1 >= 0 && firstFieldFilled && board[y][x - 1].isFilled()) {
             int firstEntry = blackRegions.remove(0);
             if (blackRegions.size() > 0) {
                 firstEntry += blackRegions.remove(blackRegions.size() - 1);
@@ -193,5 +181,13 @@ public class Board {
 
     public Field[][] getBoard() {
         return board;
+    }
+
+    public void reset() {
+        for (int y = 0; y < board.length; y++) {
+            for (int x = 0; x < board[y].length; x++) {
+                board[y][x] = new Field(x, y);
+            }
+        }
     }
 }

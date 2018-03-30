@@ -79,11 +79,19 @@ public class Configuration {
         board.getBoard()[7][4].setFilled(true);
     }
 
-    public static void setTestCase(Board board) {
-        board.getBoard()[1][5].setFilled(true);
-        board.getBoard()[2][5].setFilled(true);
-        board.getBoard()[3][6].setFilled(true);
-        board.getBoard()[4][6].setFilled(true);
-        board.getBoard()[5][6].setFilled(true);
+    public static void setTestCase1(Board board) {
+        board.getBoard()[0][0].setFilled(true);
+        board.getBoard()[2][0].setFilled(true);
+        board.getBoard()[0][2].setFilled(true);
+        board.getBoard()[2][2].setFilled(true);
+    }
+
+    public static void setTestCase2(Board board) {
+        board.getBoard()[0][0].setFilled(true);
+        board.getBoard()[0][1].setFilled(true);
+        board.getBoard()[1][0].setFilled(true);
+        board.getBoard()[2][1].setFilled(true);
+        board.getBoard()[1][2].setFilled(true);
+        board.getBoard()[2][2].setFilled(true);
     }
 }

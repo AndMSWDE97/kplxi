@@ -109,8 +109,8 @@ public class BoardSolver {
             int[] numbers = numberField.getNumbers();
             int y = numberField.getY();
             int x = numberField.getX();
+            ArrayList<Integer> blackRegions = board.blackRegionsSurroundingField(x, y);
             if (numbers.length > 1) {
-                ArrayList<Integer> blackRegions = board.blackRegionsSurroundingField(x, y);
                 for (int i = 0; i < numbers.length; i++) {
                     Integer foundLargestRegion = null;
                     for (Integer region : blackRegions) {
@@ -125,10 +125,11 @@ public class BoardSolver {
                 }
                 if (blackRegions.size() != 0) return true;
             } else {
-                int countBlack = board.numberOfBlackFieldsSurrounding(x, y);
-                if (countBlack > numbers[0]) {
-                    return true;
-                }
+                if (blackRegions.size() <= 1) {
+                    if (blackRegions.size() == 1 && blackRegions.get(0) > numbers[0]) {
+                        return true;
+                    }
+                } else return true;
             }
         }
 
